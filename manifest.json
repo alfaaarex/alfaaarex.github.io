@@ -1,10 +1,10 @@
 {
 	"manifest_version": 2,
-	"name": "Fluidity",
-	"description": "An accordion based browser startpage.",
+	"name": "MyBubble",
+	"description": "Your personal dashboard that loves you back.",
 	"developer": {
-		"name": "PrettyCoffee",
-		"url": "https://prettycoffee.github.io"
+		"name": "Agnihotra Nath",
+		"url": "https://alfarex.tech"
 	},
 	"permissions": [
 		"management",
