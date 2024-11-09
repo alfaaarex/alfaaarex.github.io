@@ -1,5 +1,0 @@
-﻿{
-  "Description": "Domain ownership verification file for Microsoft 365 - place in the website root",
-  "Domain": "alfarex.tech",
-  "Id": "da22f442-d0a5-4985-a1a0-2cef63dfe9cd"
-}
