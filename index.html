@@ -1,12 +1,18 @@
-<!DOCTYPE html><html><head>
+<!DOCTYPE html>
+<html>
+
+<head>
 
   <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-TR9DFPS');</script>
-<!-- End Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-TR9DFPS');</script>
+  <!-- End Google Tag Manager -->
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,7 +23,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
   <meta name="description" content="A simple tool for converting HEX values to RGB and vice versa.">
-  <meta name="keywords" content="hex, hexadecimal, rgb, converter, hex to rgb, hexadecimal to rgb, hex to rgb converter, rgb to hex, rgb to hex converter, convert hex to rgb, convert rgb to hex, hex to rgb conversion, rgb to hex conversion, hex converter, rgb converter, simple hex to rgb converter">
+  <meta name="keywords"
+    content="hex, hexadecimal, rgb, converter, hex to rgb, hexadecimal to rgb, hex to rgb converter, rgb to hex, rgb to hex converter, convert hex to rgb, convert rgb to hex, hex to rgb conversion, rgb to hex conversion, hex converter, rgb converter, simple hex to rgb converter">
   <meta property="og:title" content="HEX to RGB Converter">
   <meta property="og:image" content="static/images/apple-touch-icon.png">
   <meta property="og:description" content="A simple tool for converting HEX values to RGB and vice versa.">
@@ -34,24 +41,295 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <!-- <link rel="stylesheet" type="text/css" href="static/fonts/fonts.css?v=2" /> -->
 
-  <link rel="preload" href="static/fonts/fonts_v%3D2.css" type="text / css" as="style" onload="this.onload = null; this.rel = 'stylesheet' ; ">
+  <link rel="preload" href="static/fonts/fonts_v%3D2.css" type="text / css" as="style"
+    onload="this.onload = null; this.rel = 'stylesheet' ; ">
   <link href="https://www.googletagmanager.com/gtm.js?id=GTM-TR9DFPS" rel="preload" as="script">
 
   <!-- <link rel="stylesheet" href="static/css/site.css"> -->
   <!-- critical CSS to improve the page speed-->
   <style>
-    #wrap,.c{position:absolute}.btn,a{color:#222}.c,.tweet{left:20px}.oh a,input{display:block}.oh a,body,html{height:100%}.oh a,.oh a span{left:0;width:100%}.dark .btn,.dark .c{color:#fff}*{margin:0;padding:0;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}body,input{font:300 18px/1.2 'Gotham SSm A','Gotham SSm B',sans-serif;background:#ffd454}a{text-decoration:none}a:hover{color:#111}a:focus{outline:0}input{width:335px;font-size:34px;line-height:44px;background:0 0;border:none;border-bottom:1px dotted rgba(0,0,0,.4);padding:5px 0;border-radius:0}input:focus{border-bottom-color:#000;outline:0}.c{top:20px;font-size:18px;font-weight:700;line-height:1.2;text-transform:uppercase;letter-spacing:1px}#wrap{width:340px;height:125px;top:50%;left:50%;margin:-62.5px -170px}#hex{margin-bottom:15px}.btn{display:inline-block;max-width:100%;height:31px;font:bold 13px/29px "Helvetica Neue",Helvetica,sans-serif;background-color:transparent;border:1px solid #222;padding:0 8px;border-radius:3px}.light,.light input{color:#222!important}.btn:active,.btn:focus,.btn:hover{background-color:rgba(0,0,0,.05)}.btn svg{position:relative;top:2px;margin-right:1px;fill:#222}.feedback a,.logo,.oh a,.oh a span,.tweet{position:absolute}.feedback a{top:20px;right:20px}.tweet{bottom:20px}.logo{left:50%;bottom:20px;width:30px;height:46px;margin-left:-15px}.oh a{top:0;font-size:60px;font-weight:200;line-height:80px;text-align:center;z-index:1}.oh a span{top:50%;margin-top:-40px}.light input{border-bottom-color:rgba(0,0,0,.4)}.light input:focus{border-bottom-color:#000}.dark .c:hover{color:#ccc}.dark input{color:#fff!important;border-bottom-color:rgba(255,255,255,.4)}.dark input:focus{border-bottom-color:#fff}.dark .btn{border-color:#fff}.dark .btn:hover{background-color:rgba(255,255,255,.15)}.dark svg{fill:#fff}.dark ::-webkit-input-placeholder{color:#fff!important}.dark :-moz-placeholder{color:#fff!important}.dark ::-moz-placeholder{color:#fff!important}.dark :-ms-input-placeholder{color:#fff!important}::-webkit-input-placeholder{color:#222}:-moz-placeholder{color:#222}::-moz-placeholder{color:#222}:-ms-input-placeholder{color:#222}@media only screen and (max-width:400px){#wrap,input{width:280px}.c,.tweet{left:15px}.logo,.tweet{bottom:15px}input{font-size:28px;line-height:40px}#wrap{margin-left:-140px}.c{top:15px}.feedback a{top:15px;right:15px}}
+    #wrap,
+    .c {
+      position: absolute
+    }
 
+    .btn,
+    a {
+      color: #222
+    }
+
+    .c,
+    .tweet {
+      left: 20px
+    }
+
+    .oh a,
+    input {
+      display: block
+    }
+
+    .oh a,
+    body,
+    html {
+      height: 100%
+    }
+
+    .oh a,
+    .oh a span {
+      left: 0;
+      width: 100%
+    }
+
+    .dark .btn,
+    .dark .c {
+      color: #fff
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box
+    }
+
+    body,
+    input {
+      font: 300 18px/1.2 'Gotham SSm A', 'Gotham SSm B', sans-serif;
+      background: #ffd454
+    }
+
+    a {
+      text-decoration: none
+    }
+
+    a:hover {
+      color: #111
+    }
+
+    a:focus {
+      outline: 0
+    }
+
+    input {
+      width: 335px;
+      font-size: 34px;
+      line-height: 44px;
+      background: 0 0;
+      border: none;
+      border-bottom: 1px dotted rgba(0, 0, 0, .4);
+      padding: 5px 0;
+      border-radius: 0
+    }
+
+    input:focus {
+      border-bottom-color: #000;
+      outline: 0
+    }
+
+    .c {
+      top: 20px;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.2;
+      text-transform: uppercase;
+      letter-spacing: 1px
+    }
+
+    #wrap {
+      width: 340px;
+      height: 125px;
+      top: 50%;
+      left: 50%;
+      margin: -62.5px -170px
+    }
+
+    #hex {
+      margin-bottom: 15px
+    }
+
+    .btn {
+      display: inline-block;
+      max-width: 100%;
+      height: 31px;
+      font: bold 13px/29px "Helvetica Neue", Helvetica, sans-serif;
+      background-color: transparent;
+      border: 1px solid #222;
+      padding: 0 8px;
+      border-radius: 3px
+    }
+
+    .light,
+    .light input {
+      color: #222 !important
+    }
+
+    .btn:active,
+    .btn:focus,
+    .btn:hover {
+      background-color: rgba(0, 0, 0, .05)
+    }
+
+    .btn svg {
+      position: relative;
+      top: 2px;
+      margin-right: 1px;
+      fill: #222
+    }
+
+    .feedback a,
+    .logo,
+    .oh a,
+    .oh a span,
+    .tweet {
+      position: absolute
+    }
+
+    .feedback a {
+      top: 20px;
+      right: 20px
+    }
+
+    .tweet {
+      bottom: 20px
+    }
+
+    .logo {
+      left: 50%;
+      bottom: 20px;
+      width: 30px;
+      height: 46px;
+      margin-left: -15px
+    }
+
+    .oh a {
+      top: 0;
+      font-size: 60px;
+      font-weight: 200;
+      line-height: 80px;
+      text-align: center;
+      z-index: 1
+    }
+
+    .oh a span {
+      top: 50%;
+      margin-top: -40px
+    }
+
+    .light input {
+      border-bottom-color: rgba(0, 0, 0, .4)
+    }
+
+    .light input:focus {
+      border-bottom-color: #000
+    }
+
+    .dark .c:hover {
+      color: #ccc
+    }
+
+    .dark input {
+      color: #fff !important;
+      border-bottom-color: rgba(255, 255, 255, .4)
+    }
+
+    .dark input:focus {
+      border-bottom-color: #fff
+    }
+
+    .dark .btn {
+      border-color: #fff
+    }
+
+    .dark .btn:hover {
+      background-color: rgba(255, 255, 255, .15)
+    }
+
+    .dark svg {
+      fill: #fff
+    }
+
+    .dark ::-webkit-input-placeholder {
+      color: #fff !important
+    }
+
+    .dark :-moz-placeholder {
+      color: #fff !important
+    }
+
+    .dark ::-moz-placeholder {
+      color: #fff !important
+    }
+
+    .dark :-ms-input-placeholder {
+      color: #fff !important
+    }
+
+    ::-webkit-input-placeholder {
+      color: #222
+    }
+
+    :-moz-placeholder {
+      color: #222
+    }
+
+    ::-moz-placeholder {
+      color: #222
+    }
+
+    :-ms-input-placeholder {
+      color: #222
+    }
+
+    @media only screen and (max-width:400px) {
+
+      #wrap,
+      input {
+        width: 280px
+      }
+
+      .c,
+      .tweet {
+        left: 15px
+      }
+
+      .logo,
+      .tweet {
+        bottom: 15px
+      }
+
+      input {
+        font-size: 28px;
+        line-height: 40px
+      }
+
+      #wrap {
+        margin-left: -140px
+      }
+
+      .c {
+        top: 15px
+      }
+
+      .feedback a {
+        top: 15px;
+        right: 15px
+      }
+    }
   </style>
   <link rel="canonical" href="https://www.webfx.com/web-design/hex-to-rgb/">
 
 
 </head>
+
 <body>
   <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TR9DFPS"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TR9DFPS" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
   <a class="c" href="https://www.webfx.com/web-design/random-color-picker/" tabindex="-1">Colorrrs</a>
 
@@ -60,18 +338,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <input id="rgb" type="text" placeholder="rgb" autocomplete="off">
   </div>
 
-  <a class="tweet btn" href="https://twitter.com/intent/tweet?text=HEX%20to%20RGB%20Converter%20by%20@webfx&url=https%3A%2F%2Fwww.webfx.com%2Fweb-design%2Fhex-to-rgb%2F">
-    <svg width="17px" height="13px" viewBox="0 0 30 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-      <path d="M29.9412896,2.83945075 C28.8553433,3.32117015 27.6882269,3.64678209 26.4632955,3.79300299 C27.7133731,3.04355821 28.6737313,1.85688358 29.125791,0.442746269 C27.9556657,1.1367403 26.6597373,1.64066866 25.2803463,1.91219104 C24.1757731,0.735259701 22.6019463,0 20.860191,0 C16.9514149,0 14.078006,3.64771343 14.9614209,7.43641791 C9.92858507,7.18395224 5.46644776,4.77299104 2.47977313,1.10944478 C0.893480597,3.83061493 1.65696716,7.39242985 4.35678806,9.1942209 C3.36426269,9.16284179 2.43026866,8.89038806 1.61398209,8.4366806 C1.54828657,11.2450388 3.55547463,13.8671284 6.47129552,14.4509373 C5.61904478,14.6828418 4.68555224,14.7359284 3.73672836,14.554603 C4.50716418,16.9617672 6.74568358,18.7098269 9.39642985,18.7599761 C6.84426269,20.7554149 3.63442388,21.6437731 0.424871642,21.2666507 C3.10470448,22.9860537 6.28517015,23.9890388 9.70964776,23.987391 C20.9525373,23.987391 27.3045134,14.4912 26.9216597,5.97413731 C28.1028896,5.12317612 29.1317373,4.05571343 29.9412896,2.83945075 L29.9412896,2.83945075 Z"></path>
+  <a class="tweet btn"
+    href="https://twitter.com/intent/tweet?text=HEX%20to%20RGB%20Converter%20by%20@webfx&url=https%3A%2F%2Fwww.webfx.com%2Fweb-design%2Fhex-to-rgb%2F">
+    <svg width="17px" height="13px" viewBox="0 0 30 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink">
+      <path
+        d="M29.9412896,2.83945075 C28.8553433,3.32117015 27.6882269,3.64678209 26.4632955,3.79300299 C27.7133731,3.04355821 28.6737313,1.85688358 29.125791,0.442746269 C27.9556657,1.1367403 26.6597373,1.64066866 25.2803463,1.91219104 C24.1757731,0.735259701 22.6019463,0 20.860191,0 C16.9514149,0 14.078006,3.64771343 14.9614209,7.43641791 C9.92858507,7.18395224 5.46644776,4.77299104 2.47977313,1.10944478 C0.893480597,3.83061493 1.65696716,7.39242985 4.35678806,9.1942209 C3.36426269,9.16284179 2.43026866,8.89038806 1.61398209,8.4366806 C1.54828657,11.2450388 3.55547463,13.8671284 6.47129552,14.4509373 C5.61904478,14.6828418 4.68555224,14.7359284 3.73672836,14.554603 C4.50716418,16.9617672 6.74568358,18.7098269 9.39642985,18.7599761 C6.84426269,20.7554149 3.63442388,21.6437731 0.424871642,21.2666507 C3.10470448,22.9860537 6.28517015,23.9890388 9.70964776,23.987391 C20.9525373,23.987391 27.3045134,14.4912 26.9216597,5.97413731 C28.1028896,5.12317612 29.1317373,4.05571343 29.9412896,2.83945075 L29.9412896,2.83945075 Z">
+      </path>
     </svg>
     <span>Tweet</span>
   </a>
 
-    <div style="text-align:center; position:absolute; bottom:20px; left:50%; transform: translate(-50%, -50%); "><a href="/web-design/random-color-picker/">Color Picker</a> | <a href="/web-design/agency/">Web Design Agency</a> | <a href="/seo/services/">SEO Services</a> | <a href="https://www.webfx.com/blog/web-design/psychology-of-color-infographic/">Color & Marketing</a> | <a href="https://www.semrush.com/agencies/webfx/" target="_blank">Semrush Agency Partner</a></div>
+  <div style="text-align:center; position:absolute; bottom:20px; left:50%; transform: translate(-50%, -50%); "><a
+      href="/web-design/random-color-picker/">Color Picker</a> | <a href="/web-design/agency/">Web Design Agency</a> |
+    <a href="/seo/services/">SEO Services</a> | <a
+      href="https://www.webfx.com/blog/web-design/psychology-of-color-infographic/">Color & Marketing</a> | <a
+      href="https://www.semrush.com/agencies/webfx/" target="_blank">Semrush Agency Partner</a></div>
 
   <script src="static/js/jquery.js" async=""></script>
   <script src="static/js/site.max.js" async=""></script>
 
 
 
-</body></html>
+</body>
+
+</html>
