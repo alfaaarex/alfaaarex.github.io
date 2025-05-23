@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
-  </style>
 
   <!-- Google Tag Manager -->
   <script>(function (w, d, s, l, i) {
@@ -26,11 +23,11 @@
 
   <meta name="description" content="A simple tool for converting HEX values to RGB and vice versa.">
   <meta name="keywords"
-    content="hex, hexadecimal, rgb, converter, hex to rgb, hexadecimal to rgb, hex to rgb converter, rgb to hex, rgb to hex converter, convert hex to rgb, convert rgb to hex, hex to rgb conversion, rgb to hex conversion, hex converter, rgb converter, simple hex to rgb converter">
-  <meta property="og:title" content="HEX to RGB Converter">
+    content="hex alfarex, hexadecimal, rgb, converter, hex to rgb, hexadecimal to rgb, hex to rgb converter, rgb to hex, rgb to hex converter, convert hex to rgb, convert rgb to hex, hex to rgb conversion, rgb to hex conversion, hex converter, rgb converter, simple hex to rgb converter">
+  <meta property="og:title" content="HueKit by Alfarex">
   <meta property="og:image" content="static/images/apple-touch-icon.png">
   <meta property="og:description" content="A simple tool for converting HEX values to RGB and vice versa.">
-  <meta property="og:url" content="https://www.webfx.com/web-design/hex-to-rgb/">
+  <meta property="og:url" content="https://huekit.alfarex.me/">
 
   <title>Instant HEX to RGB or RGB to HEX Converter Tool</title>
 
@@ -45,6 +42,9 @@
 
   <link rel="preload" href="static/fonts/fonts_v%3D2.css" type="text / css" as="style"
     onload="this.onload = null; this.rel = 'stylesheet' ; ">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
   <link href="https://www.googletagmanager.com/gtm.js?id=GTM-TR9DFPS" rel="preload" as="script">
 
   <!-- <link rel="stylesheet" href="static/css/site.css"> -->
@@ -54,7 +54,12 @@
     .c {
       position: absolute
     }
-
+    .roboto-mono-fnt {
+      font-family: "Roboto Mono", monospace;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;
+    }
     .btn,
     a {
       color: #222
@@ -101,7 +106,7 @@
     body,
     input {
       font: 300 18px/1.2 'Gotham SSm A', 'Gotham SSm B', sans-serif;
-      background: #ffd454
+      background: #404040
     }
 
     a {
