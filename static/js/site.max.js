@@ -2,7 +2,11 @@
 /*! rgbHex - v1.1.2 - 2013-09-27 */window.rgbHex=function(){function a(a){return!isNaN(parseFloat(a))&&isFinite(a)}function b(a){return a.replace(/^\s+|\s+$/g,"")}function c(c){return c=b(c),a(c)&&c>=0&&255>=c}function d(a){return/^[0-9a-f]{3}$|^[0-9a-f]{6}$/i.test(b(a))}function e(a){return a=parseInt(a,10).toString(16),1===a.length?"0"+a:a}function f(a){return parseInt(a,16).toString()}function g(b){return b=b.split(","),(3===b.length||4===b.length)&&c(b[0])&&c(b[1])&&c(b[2])?4!==b.length||a(b[3])?"#"+e(b[0]).toUpperCase()+e(b[1]).toUpperCase()+e(b[2]).toUpperCase():null:null}function h(a){return d(a)?(3===a.length&&(a=a.charAt(0)+a.charAt(0)+a.charAt(1)+a.charAt(1)+a.charAt(2)+a.charAt(2)),"rgb("+f(a.substr(0,2))+","+f(a.substr(2,2))+","+f(a.substr(4,2))+")"):void 0}function i(a){return a.replace(/\s/g,"")}return function(a){if(!a)return null;var c=null,d=/^rgba?\((.*)\);?$/,e=/^#/;return a=b(a.toString()),"transparent"===a||"rgba(0,0,0,0)"===i(a)?"transparent":d.test(a)?g(a.match(d)[1]):e.test(a)?h(a.split("#").reverse()[0]):(c=a.split(","),1===c.length?h(a):3===c.length||4===c.length?g(a):void 0)}}(),jQuery&&jQuery.extend({rgbHex:function(a){return window.rgbHex(a)}});
 /* colourBrightness.js by @jamiebrittain */!function(r){r.fn.colourBrightness=function(){function r(r){for(var t="";"html"!=r[0].tagName.toLowerCase()&&(t=r.css("background-color"),"rgba(0, 0, 0, 0)"==t||"transparent"==t);)r=r.parent();return t}var t,a,s,e,n=r(this);return n.match(/^rgb/)?(n=n.match(/rgba?\(([^)]+)\)/)[1],n=n.split(/ *, */).map(Number),t=n[0],a=n[1],s=n[2]):"#"==n[0]&&7==n.length?(t=parseInt(n.slice(1,3),16),a=parseInt(n.slice(3,5),16),s=parseInt(n.slice(5,7),16)):"#"==n[0]&&4==n.length&&(t=parseInt(n[1]+n[1],16),a=parseInt(n[2]+n[2],16),s=parseInt(n[3]+n[3],16)),e=(299*t+587*a+114*s)/1e3,125>e?this.removeClass("light").addClass("dark"):this.removeClass("dark").addClass("light"),this}}(jQuery);
 
-$(window).load(function(){
+// TypeScript: Extend the Window interface for 'url'
+  var $hex = $('#hex'),
+      $rgb = $('#rgb'),
+      $hsl = $('#hsl'),
+      $cmyk = $('#cmyk');
   var $hex = $('#hex'),
       $rgb = $('#rgb'),
       $hsl = $('#hsl'),
@@ -14,12 +18,16 @@ $(window).load(function(){
 
   window.onhashchange = hashColour;
   hashColour();
-
-  function hashColour() {
-    var url, urlHash, urlColour;
-    url = window.location.href;
+    // @ts-ignore
     urlHash = window.url('#', url);
-
+    // @ts-ignore
+    if(window.url('#', url)) {
+      // @ts-ignore
+      urlColour = window.url('#', url);
+    } else {
+      // @ts-ignore
+      urlColour = window.url('-1', url);
+    }
     if(window.url('#', url)) {
       urlColour = window.url('#', url);
     } else {
@@ -181,15 +189,7 @@ $(window).load(function(){
     else {
       $('#hex').val('');
     }
-
-    $('body').css('background-color', $hex.val());
-    $('body').colourBrightness();
-
-    if(e.keyCode == 13){
-      $hex.select();
-    }
-  });
-  $('.tweet').click(function(e){
+  $('.tweet').click(function(){
     var width  = 575,
         height = 400,
         left   = ($(window).width() - width) / 2,
@@ -197,6 +197,14 @@ $(window).load(function(){
         url    = this.href,
         opts   = 'status=1' +
                  ',width='  + width  +
+                 ',height=' + height +
+                 ',top='    + top    +
+                 ',left='   + left;
+
+    window.open(url, 'twitter', opts);
+
+    return false;
+  });
                  ',height=' + height +
                  ',top='    + top    +
                  ',left='   + left;
