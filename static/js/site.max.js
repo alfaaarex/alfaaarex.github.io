@@ -5,8 +5,12 @@
 $(window).load(function(){
   var $hex = $('#hex'),
       $rgb = $('#rgb'),
+      $hsl = $('#hsl'),
+      $cmyk = $('#cmyk'),
       $hex_val = $('#hex').val(),
       $rgb_val = $('#rgb').val();
+      $hsl_val = $('#hsl').val(),
+      $cmyk_val = $('#cmyk').val(),
 
   window.onhashchange = hashColour;
   hashColour();
@@ -78,7 +82,40 @@ $(window).load(function(){
       $hex.select();
     }
   });
+  $hsl.bind('blur keyup', function(e){
+    colour = $.rgbHex($('#hsl').val());
 
+    if(colour){
+      $('#hex').val(colour);
+    }
+    else {
+      $('#hex').val('');
+    }
+
+    $('body').css('background-color', $hex.val());
+    $('body').colourBrightness();
+
+    if(e.keyCode == 13){
+      $hex.select();
+    }
+  });
+  $cmyk.bind('blur keyup', function(e){
+    colour = $.rgbHex($('#cmyk').val());
+
+    if(colour){
+      $('#hex').val(colour);
+    }
+    else {
+      $('#hex').val('');
+    }
+
+    $('body').css('background-color', $hex.val());
+    $('body').colourBrightness();
+
+    if(e.keyCode == 13){
+      $hex.select();
+    }
+  });
   $('.tweet').click(function(e){
     var width  = 575,
         height = 400,
