@@ -8,9 +8,9 @@ $(window).load(function(){
       $hsl = $('#hsl'),
       $cmyk = $('#cmyk'),
       $hex_val = $('#hex').val(),
-      $rgb_val = $('#rgb').val();
+      $rgb_val = $('#rgb').val(),
       $hsl_val = $('#hsl').val(),
-      $cmyk_val = $('#cmyk').val(),
+      $cmyk_val = $('#cmyk').val();
 
   window.onhashchange = hashColour;
   hashColour();
@@ -30,13 +30,27 @@ $(window).load(function(){
       if(urlColour.match('^[0-9A-Fa-f]{3}$') || urlColour.match('^[0-9A-Fa-f]{6}$')) {
         $hex.val('#' + urlColour);
 
-        colour = $.rgbHex($hex.val());
+        var colour = $.rgbHex($hex.val());
 
         if(colour) {
           $rgb.val(colour);
           $rgb.select();
+
+          // Convert HEX to HSL and CMYK and set values
+          var rgb = hexToRgb($hex.val());
+          if (rgb) {
+            var hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+            $hsl.val('hsl(' + hsl.h + ', ' + hsl.s + '%, ' + hsl.l + '%)');
+            var cmyk = rgbToCmyk(rgb.r, rgb.g, rgb.b);
+            $cmyk.val('cmyk(' + cmyk.c + '%, ' + cmyk.m + '%, ' + cmyk.y + '%, ' + cmyk.k + '%)');
+          } else {
+            $hsl.val('');
+            $cmyk.val('');
+          }
         } else {
           $rgb.val('');
+          $hsl.val('');
+          $cmyk.val('');
         }
 
         $('body').css('background-color', $rgb.val());
@@ -45,6 +59,65 @@ $(window).load(function(){
         $hex.focus();
       }
     }
+  }
+
+  // Helper: HEX to RGB
+  function hexToRgb(hex) {
+    hex = hex.replace(/^#/, '');
+    if (hex.length === 3) {
+      hex = hex.split('').map(function (x) { return x + x; }).join('');
+    }
+    var num = parseInt(hex, 16);
+    if (isNaN(num)) return null;
+    return {
+      r: (num >> 16) & 255,
+      g: (num >> 8) & 255,
+      b: num & 255
+    };
+  }
+
+  // Helper: RGB to HSL
+  function rgbToHsl(r, g, b) {
+    r /= 255; g /= 255; b /= 255;
+    var max = Math.max(r, g, b), min = Math.min(r, g, b);
+    var h, s, l = (max + min) / 2;
+
+    if (max === min) {
+      h = s = 0;
+    } else {
+      var d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch (max) {
+        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+        case g: h = (b - r) / d + 2; break;
+        case b: h = (r - g) / d + 4; break;
+      }
+      h /= 6;
+    }
+    return {
+      h: Math.round(h * 360),
+      s: Math.round(s * 100),
+      l: Math.round(l * 100)
+    };
+  }
+
+  // Helper: RGB to CMYK
+  function rgbToCmyk(r, g, b) {
+    var c = 1 - (r / 255),
+        m = 1 - (g / 255),
+        y = 1 - (b / 255),
+        k = Math.min(c, m, y);
+
+    if (k === 1) {
+      return {c: 0, m: 0, y: 0, k: 100};
+    }
+
+    c = Math.round(((c - k) / (1 - k)) * 100);
+    m = Math.round(((m - k) / (1 - k)) * 100);
+    y = Math.round(((y - k) / (1 - k)) * 100);
+    k = Math.round(k * 100);
+
+    return {c: c, m: m, y: y, k: k};
   }
 
   $hex.bind('blur keyup', function(e){
