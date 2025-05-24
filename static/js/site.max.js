@@ -91,8 +91,6 @@ $(window).load(function(){
                  ',top='    + top    +
                  ',left='   + left;
 
-    window.open(url, 'twitter', opts);
-
     return false;
   });
 });
