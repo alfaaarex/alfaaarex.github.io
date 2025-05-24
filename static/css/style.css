@@ -16,6 +16,7 @@ html {
 
 body {
     font-family: "Roboto Mono", monospace;
+    font-size: auto;
     background: #ffd454;
     color: #222
 }
