@@ -23,7 +23,7 @@ $(window).load(function(){
 
     $('body').addClass('touch');
     $('h1').addClass('s');
-    $('h1').html('<a href="/web-design/random-color-picker/' + hex + '">Tap here</a>');
+    $('h1').html('<a href="/picker.html' + hex + '">Tap here</a>');
   }
 
   window.onhashchange = hashColour;
@@ -59,7 +59,7 @@ $(window).load(function(){
           }
 
           $('h1').removeClass();
-          $('h1').html('<a href="/web-design/random-color-picker/' + hex + '">' + colour + '</a>');
+          $('h1').html('<a href="/picker.html' + hex + '">' + colour + '</a>');
           $('body').css('background-color', colour);
           $('body').colourBrightness();
         }
@@ -78,7 +78,7 @@ $(window).load(function(){
           }
 
           $('h1').addClass('s');
-          $('h1').html('<a href="/web-design/random-color-picker/' + hex + '">Tap here</a>');
+          $('h1').html('<a href="/picker.html' + hex + '">Tap here</a>');
           $('body').css('background-color', '');
           $('body').colourBrightness();
         }
@@ -109,7 +109,7 @@ $(window).load(function(){
         hex += range.charAt(Math.floor(Math.random() * range.length));
       }
 
-      window.location.replace('https://www.webfx.com/web-design/random-color-picker/' + hex);
+      window.location.replace('https://huekit.alfarex.me/' + hex);
     }
   });
 
