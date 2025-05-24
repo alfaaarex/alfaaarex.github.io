@@ -109,7 +109,7 @@ $(window).load(function () {
         hex += range.charAt(Math.floor(Math.random() * range.length));
       }
 
-      window.location.replace('https://huekit.alfarex.me/' + hex);
+      window.location.replace('https://huekit.alfarex.me/picker.html' + hex);
     }
   });
 
