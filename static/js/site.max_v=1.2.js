@@ -129,7 +129,7 @@ $(window).load(function () {
         ',top=' + top +
         ',left=' + left;
 
-    window.open('/index.html', '_blank');
+    window.open('/index.html'+ hex, '_blank');
 
     return false;
   });
