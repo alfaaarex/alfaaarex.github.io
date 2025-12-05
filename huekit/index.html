@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-TR9DFPS');</script>
+  <!-- End Google Tag Manager -->
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="HEX to RGB">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta name="description" content="Instant Colour Code Converter Tool">
+  <meta name="keywords"
+    content="hex, hsl, cmyk, alfarex, hexadecimal, rgb, converter, hex to rgb, hex to hsl, hex to cmyk, hexadecimal to rgb, hex to rgb converter, rgb to hex, rgb to hex converter, convert hex to rgb, convert rgb to hex, hex to rgb conversion, rgb to hex conversion, hex converter, rgb converter, simple hex to rgb converter">
+  <meta property="og:title" content="HueKit by Alfarex">
+  <meta property="og:image" content="static/images/apple-touch-icon.png">
+  <meta property="og:description" content="Instant Colour Code Converter Tool">
+  <meta property="og:url" content="https://huekit.alfarex.me/">
+
+  <title>HueKit Code Manager</title>
+
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="static/images/apple-touch-icon-57.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="static/images/apple-touch-icon-72.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="static/images/apple-touch-icon-114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="static/images/apple-touch-icon-144.png">
+
+  <link rel="shortcut icon" href="static/images/favicon.png">
+
+  <!-- <link rel="stylesheet" type="text/css" href="static/fonts/fonts.css?v=2" /> -->
+
+  <link rel="preload" href="static/fonts/fonts_v%3D2.css" type="text / css" as="style"
+    onload="this.onload = null; this.rel = 'stylesheet' ; ">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+  <link href="https://www.googletagmanager.com/gtm.js?id=GTM-TR9DFPS" rel="preload" as="script">
+
+  <!-- <link rel="stylesheet" href="static/css/site.css"> -->
+  <!-- critical CSS to improve the page speed-->
+  <style>
+    #wrap,
+    .c {
+      position: absolute
+    }
+    .roboto-mono-fnt {
+      font-family: "Roboto Mono", monospace;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;
+    }
+    .btn,
+    a {
+      color: #222
+    }
+
+    .c,
+    .tweet {
+      left: 20px
+    }
+
+    .oh a,
+    input {
+      display: block
+    }
+
+    .oh a,
+    body,
+    html {
+      height: 100%
+    }
+
+    .oh a,
+    .oh a span {
+      left: 0;
+      width: 100%
+    }
+
+    .dark .btn,
+    .dark .c {
+      color: #fff
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box
+    }
+
+    body,
+    input {
+      font-family: "Roboto Mono", monospace;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 16px;
+      background: #fff2e4
+    }
+
+    a {
+      text-decoration: none
+    }
+
+    a:hover {
+      color: #111
+    }
+
+    a:focus {
+      outline: 0
+    }
+
+    input {
+      width: 335px;
+      font-size: 34px;
+      line-height: 44px;
+      background: 0 0;
+      border: none;
+      border-bottom: 1px dotted rgba(0, 0, 0, .4);
+      padding: 5px 0;
+      border-radius: 0
+    }
+
+    input:focus {
+      border-bottom-color: #000;
+      outline: 0
+    }
+
+    .c {
+      top: 20px;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.2;
+      text-transform: uppercase;
+      letter-spacing: 1px
+    }
+
+    #wrap {
+      width: 340px;
+      height: 125px;
+      top: 50%;
+      left: 50%;
+      margin: -62.5px -170px
+    }
+
+    #hex {
+      margin-bottom: 15px
+    }
+    #rgb {
+      margin-bottom: 15px
+    }
+    #hsl {
+      margin-bottom: 15px
+    }
+
+    .btn {
+      display: inline-block;
+      max-width: 100%;
+      height: 31px;
+      background-color: transparent;
+      border: 1px solid #222;
+      padding: 0 8px;
+      border-radius: 3px
+    }
+
+    .light,
+    .light input {
+      color: #222 !important
+    }
+
+    .btn:active,
+    .btn:focus,
+    .btn:hover {
+      background-color: rgba(0, 0, 0, .05)
+    }
+
+    .btn svg {
+      position: relative;
+      top: 2px;
+      margin-right: 1px;
+      fill: #222
+    }
+
+    .feedback a,
+    .logo,
+    .oh a,
+    .oh a span,
+    .tweet {
+      position: absolute
+    }
+
+    .feedback a {
+      top: 20px;
+      right: 20px
+    }
+
+    .tweet {
+      bottom: 20px
+    }
+
+    .logo {
+      left: 50%;
+      bottom: 20px;
+      width: 30px;
+      height: 46px;
+      margin-left: -15px
+    }
+
+    .oh a {
+      top: 0;
+      font-size: 60px;
+      font-weight: 200;
+      line-height: 80px;
+      text-align: center;
+      z-index: 1
+    }
+
+    .oh a span {
+      top: 50%;
+      margin-top: -40px
+    }
+
+    .light input {
+      border-bottom-color: rgba(0, 0, 0, .4)
+    }
+
+    .light input:focus {
+      border-bottom-color: #000
+    }
+
+    .dark .c:hover {
+      color: #ccc
+    }
+
+    .dark input {
+      color: #fff !important;
+      border-bottom-color: rgba(255, 255, 255, .4)
+    }
+
+    .dark input:focus {
+      border-bottom-color: #fff
+    }
+
+    .dark .btn {
+      border-color: #fff
+    }
+
+    .dark .btn:hover {
+      background-color: rgba(255, 255, 255, .15)
+    }
+
+    .dark svg {
+      fill: #fff
+    }
+
+    .dark ::-webkit-input-placeholder {
+      color: #fff !important
+    }
+
+    .dark :-moz-placeholder {
+      color: #fff !important
+    }
+
+    .dark ::-moz-placeholder {
+      color: #fff !important
+    }
+
+    .dark :-ms-input-placeholder {
+      color: #fff !important
+    }
+
+    ::-webkit-input-placeholder {
+      color: #222
+    }
+
+    :-moz-placeholder {
+      color: #222
+    }
+
+    ::-moz-placeholder {
+      color: #222
+    }
+
+    :-ms-input-placeholder {
+      color: #222
+    }
+
+    @media only screen and (max-width:400px) {
+
+      #wrap,
+      input {
+        width: 280px
+      }
+
+      .c,
+      .tweet {
+        left: 15px
+      }
+
+      .logo,
+      .tweet {
+        bottom: 15px
+      }
+
+      input {
+        font-size: 28px;
+        line-height: 40px
+      }
+
+      #wrap {
+        margin-left: -140px
+      }
+
+      .c {
+        top: 15px
+      }
+
+      .feedback a {
+        top: 15px;
+        right: 15px
+      }
+    }
+  </style>
+  <link rel="canonical" href="https://www.webfx.com/web-design/hex-to-rgb/">
+
+
+</head>
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TR9DFPS" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <a class="c" href="https://www.webfx.com/web-design/random-color-picker/" tabindex="-1">HueKit by Alfarex</a>
+
+  <div id="wrap">
+    <input id="hex" type="text" placeholder="hex" autocomplete="off">
+    <input id="rgb" type="text" placeholder="rgb" autocomplete="off">
+  </div>
+
+  <a class="tweet btn"
+    href="/picker.html/">
+    <span>Color Picker</span>
+  </a>
+
+  <div style="text-align:center; position:absolute; bottom:20px; left:50%; transform: translate(-50%, -50%); "><a
+      href="https://alfarex.me/">About Me</a> | <a href="https://eden.alfarex.me/">Project Eden</a> | <a
+      href="https://titir.alfarex.me/">A cool startpage</a> | <a
+      href="https://carcino-fighters.vercel.app/" target="_blank">The Carcino Foundation</a></div>
+
+  <script src="static/js/jquery.js" async=""></script>
+  <script src="static/js/site.max.js" async=""></script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+{
+	"manifest_version": 2,
+	"name": "MyBubble",
+	"description": "Your personal dashboard that loves you back.",
+	"developer": {
+		"name": "Agnihotra Nath",
+		"url": "https://alfarex.me"
+	},
+	"permissions": [
+		"management",
+		"history",
+		"storage"
+	],
+	"content_security_policy": "script-src 'self' 'sha256-xuejLQ29qZc344LEr80Z2fLQc/Q/4XaQRaIDtWFnz2Y='; object-src 'self'",
+	"chrome_url_overrides": {
+		"newtab": "./index.html"
+	}
+}
