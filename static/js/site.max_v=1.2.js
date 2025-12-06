@@ -109,7 +109,8 @@ $(window).load(function () {
         hex += range.charAt(Math.floor(Math.random() * range.length));
       }
 
-      window.location.replace('https://huekit.alfarex.me/picker.html' + hex);
+  // Redirect to the GitHub Pages picker on the current project's domain
+  window.location.replace('https://alfaaarex.github.io/picker.html' + hex);
     }
   });
 
