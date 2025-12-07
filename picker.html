@@ -45,20 +45,108 @@
   <link rel="stylesheet" href="static/css/style.css">
 
   <style>
-    /* Toolbar for palette generation */
-    .hk-toolbar{position:fixed;top:12px;right:12px;z-index:9999;background:rgba(255,255,255,0.9);border:1px solid rgba(0,0,0,0.08);padding:8px;border-radius:6px;box-shadow:0 6px 18px rgba(0,0,0,0.06);font-family:Roboto Mono,monospace}
-    .hk-toolbar .label{font-size:12px;margin-bottom:6px;display:block;color:#222}
-    .hk-toolbar .btns{display:flex;gap:6px}
-    .hk-toolbar .options{display:flex;align-items:center;gap:8px;margin-left:8px}
-    .hk-toolbar label.toggle{font-size:12px;display:inline-flex;align-items:center;gap:6px;color:#222}
-    .hk-toolbar button{background:#fff;border:1px solid #ddd;padding:6px 8px;border-radius:4px;cursor:pointer;font-size:13px}
-    .hk-toolbar button:hover{background:#f6f6f6}
+    /* Toolbar for palette generation - updated to match site styles */
+    .hk-toolbar{
+      position:fixed;
+      top:12px; right:12px;
+      z-index:9999;
+      background:transparent;
+      border:1px solid rgba(0,0,0,0.12);
+      padding:8px;
+      border-radius:6px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.06);
+      font-family:Roboto Mono, monospace;
+      color:#222;
+      backdrop-filter: blur(4px);
+    }
+    body.dark .hk-toolbar{ border-color: rgba(255,255,255,0.12); color: #fff }
+
+    .hk-toolbar .label{
+      font-size:11px;
+      margin-bottom:6px;
+      display:block;
+      color:inherit;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
+
+    .hk-toolbar .btns{ display:flex; gap:6px }
+    .hk-toolbar .options{ display:flex; align-items:center; gap:8px; margin-left:8px }
+
+    .hk-toolbar label.toggle{ font-size:12px; display:inline-flex; align-items:center; gap:6px; color:inherit }
+
+    .hk-toolbar button{
+      background:transparent;
+      border:1px solid currentColor;
+      padding:6px 8px;
+      border-radius:4px;
+      cursor:pointer;
+      font-size:13px;
+      font-weight:700;
+      color:inherit;
+    }
+    .hk-toolbar button:hover{ background:rgba(0,0,0,0.05) }
+    body.dark .hk-toolbar button:hover{ background: rgba(255,255,255,0.06) }
+
+    .hk-toolbar select{ background:transparent; border:1px solid rgba(0,0,0,0.08); padding:4px; border-radius:4px; color:inherit }
+    body.dark .hk-toolbar select{ border-color: rgba(255,255,255,0.12) }
 
     /* Palette area inside #wrap */
-    .hk-palette{display:flex;gap:8px;flex-wrap:wrap;align-items:stretch;margin-top:12px}
-    .hk-swatch{flex:1 1 80px;height:96px;border-radius:6px;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:8px;font-weight:700;text-shadow:0 1px 0 rgba(0,0,0,0.25);cursor:pointer}
-    .hk-swatch .hex{font-size:13px}
-    .hk-toast{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;background:rgba(0,0,0,0.8);color:#fff;padding:8px 12px;border-radius:6px;font-family:Roboto Mono,monospace}
+    .hk-palette{ display:flex; gap:8px; flex-wrap:wrap; align-items:stretch; margin-top:12px }
+    .hk-swatch{
+      flex:1 1 80px;
+      height:96px;
+      border-radius:6px;
+      color:#fff;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      padding:8px;
+      font-weight:700;
+      text-shadow:0 1px 0 rgba(0,0,0,0.25);
+      cursor:pointer;
+      font-family:Roboto Mono, monospace;
+      transition:transform .12s ease, box-shadow .12s ease;
+    }
+    .hk-swatch:hover{ transform: translateY(-3px); box-shadow: 0 8px 22px rgba(0,0,0,0.12) }
+    .hk-swatch .hex{ font-size:13px }
+
+    .hk-toast{ position:fixed; left:50%; transform:translateX(-50%); bottom:18px; background:rgba(0,0,0,0.8); color:#fff; padding:8px 12px; border-radius:6px; font-family:Roboto Mono, monospace }
+
+    /* Background split (full-screen) */
+    .hk-bg-split{ position:fixed; inset:0; width:100%; height:100%; display:flex; z-index:0 }
+    .hk-bg-part{
+      flex:1 1 auto;
+      position:relative;
+      min-width:0;
+      display:flex;
+      align-items:flex-end;
+      justify-content:flex-end;
+      padding:14px;
+      transition: background-color .45s ease, transform .12s ease, box-shadow .12s ease, opacity .2s ease;
+      cursor:pointer;
+    }
+    .hk-bg-part.hk-flash{ transform: scale(1.01); box-shadow: inset 0 0 0 1000px rgba(255,255,255,0.04); }
+
+    .hk-bg-hex{
+      display:inline-block;
+      background: rgba(255,255,255,0.18);
+      color:#111;
+      padding:6px 10px;
+      border-radius:8px;
+      font-weight:700;
+      font-family:Roboto Mono,monospace;
+      cursor:pointer;
+      border:1px solid rgba(0,0,0,0.06);
+      text-shadow:none;
+      font-size:13px;
+      backdrop-filter: blur(4px);
+    }
+    body.dark .hk-bg-hex{ background: rgba(0,0,0,0.18); color:#fff; border-color: rgba(255,255,255,0.08) }
+
+    /* keep the main content above the background */
+    #wrap{ position:relative; z-index:1 }
   </style>
 
 
@@ -69,6 +157,8 @@
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TR9DFPS" height="0" width="0"
       style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
+
+  <div id="hk-bg-split" class="hk-bg-split" aria-hidden="true"></div>
 
   <a class="c" href="https://alfaaarex.github.io/picker.html">HueKit by Alfarex</a>
 
@@ -94,6 +184,20 @@
           <option value="monochrome">Monochrome</option>
         </select>
       </label>
+    </div>
+    <div class="tools" style="margin-top:8px; display:flex; gap:8px; align-items:center;">
+      <label style="font-size:12px;color:inherit">Orientation
+        <select id="hk-orientation" style="margin-left:6px;font-size:13px">
+          <option value="vertical">Vertical</option>
+          <option value="horizontal">Horizontal</option>
+        </select>
+      </label>
+      <button data-action="copy-palette">Copy Palette</button>
+      <button data-action="save-palette">Save Palette</button>
+      <label style="font-size:12px;color:inherit">Saved
+        <select id="hk-saved-list" style="margin-left:6px;font-size:13px"></select>
+      </label>
+      <button id="hk-delete-saved" title="Delete selected" style="font-size:12px;padding:6px">Delete</button>
     </div>
   </div>
 
@@ -123,6 +227,76 @@
         return hex;
       }
 
+      // Convert hex like #RRGGBB to {r,g,b}
+      function hexToRgb(hex) {
+        if (!hex) return { r: 0, g: 0, b: 0 };
+        var h = hex.replace('#', '');
+        if (h.length === 3) h = h.split('').map(function (c) { return c + c; }).join('');
+        var bigint = parseInt(h, 16);
+        return { r: (bigint >> 16) & 255, g: (bigint >> 8) & 255, b: bigint & 255 };
+      }
+
+      // Return either '#000' or '#fff' depending on perceived luminance
+      function getContrastColor(hex) {
+        var c = hexToRgb(hex);
+        // relative luminance
+        var r = c.r / 255, g = c.g / 255, b = c.b / 255;
+        r = (r <= 0.03928) ? r / 12.92 : Math.pow((r + 0.055) / 1.055, 2.4);
+        g = (g <= 0.03928) ? g / 12.92 : Math.pow((g + 0.055) / 1.055, 2.4);
+        b = (b <= 0.03928) ? b / 12.92 : Math.pow((b + 0.055) / 1.055, 2.4);
+        var lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        return lum > 0.55 ? '#111' : '#fff';
+      }
+
+      // Render the full-screen background split using an array of color hex strings
+      function renderBackground(colors) {
+        var bg = document.getElementById('hk-bg-split');
+        if (!bg) return;
+        bg.innerHTML = '';
+        // orientation: vertical (row) or horizontal (column)
+        var orient = (window.huekit && window.huekit.orientation) ? window.huekit.orientation : 'vertical';
+        bg.style.flexDirection = (orient === 'horizontal') ? 'column' : 'row';
+        colors.forEach(function (c, i) {
+          var part = document.createElement('div');
+          part.className = 'hk-bg-part';
+          part.style.background = c;
+          part.setAttribute('data-hex', c);
+
+          var hexEl = document.createElement('button');
+          hexEl.className = 'hk-bg-hex';
+          hexEl.textContent = c;
+
+          // determine readable colors for hex label and its backdrop
+          var contrast = getContrastColor(c);
+          // choose a semi-opaque backdrop depending on contrast so label remains legible
+          if (contrast === '#fff') {
+            hexEl.style.background = 'rgba(0,0,0,0.22)';
+            hexEl.style.color = '#fff';
+            hexEl.style.borderColor = 'rgba(255,255,255,0.06)';
+          } else {
+            hexEl.style.background = 'rgba(255,255,255,0.22)';
+            hexEl.style.color = '#111';
+            hexEl.style.borderColor = 'rgba(0,0,0,0.06)';
+          }
+
+          // clicking the small hex copies the value (don't let the parent handler re-run twice)
+          hexEl.addEventListener('click', function (ev) {
+            ev.stopPropagation();
+            copyToClipboard(c).then(function () { showToast('Copied ' + c); });
+          });
+
+          // clicking the full stripe also copies the value and shows a quick flash
+          part.addEventListener('click', function () {
+            copyToClipboard(c).then(function () { showToast('Copied ' + c); });
+            part.classList.add('hk-flash');
+            window.setTimeout(function () { part.classList.remove('hk-flash'); }, 220);
+          });
+
+          part.appendChild(hexEl);
+          bg.appendChild(part);
+        });
+      }
+
       function copyToClipboard(text) {
         if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(text);
         var ta = document.createElement('textarea');
@@ -147,6 +321,8 @@
           sw.addEventListener('click', function () { copyToClipboard(c).then(function () { showToast('Copied ' + c); }); });
           container.appendChild(sw);
         });
+        // also render the full-screen split background
+        try { renderBackground(colors); } catch (e) { /* fail silently */ }
       }
 
       // Convert HSL to RGB (expects h in [0,360], s and l in [0,100])
@@ -219,12 +395,16 @@
       function generatePalette(n) {
         var harmony = !!document.getElementById('hk-harmony') && document.getElementById('hk-harmony').checked;
         if (harmony) {
-          renderPalette(generateHarmony(n));
+          var cols = generateHarmony(n);
+          window.huekit.currentPalette = cols.slice();
+          renderPalette(cols);
           return;
         }
         var arr = [];
         for (var i = 0; i < n; i++) arr.push(randomHex());
-        renderPalette(arr.map(function(c){return c.toUpperCase();}));
+        var up = arr.map(function(c){return c.toUpperCase();});
+        window.huekit.currentPalette = up.slice();
+        renderPalette(up);
       }
 
       // bind toolbar buttons and record last count
@@ -262,6 +442,79 @@
 
       // expose on window for quick testing in console
       window.huekit = window.huekit || {}; window.huekit.generatePalette = generatePalette;
+
+      // helper: copy whole palette (joined by commas)
+      function copyPalette() {
+        var cols = (window.huekit && window.huekit.currentPalette) ? window.huekit.currentPalette : [];
+        if (!cols || !cols.length) { showToast('No palette to copy'); return; }
+        var txt = cols.join(', ');
+        copyToClipboard(txt).then(function () { showToast('Palette copied'); });
+      }
+
+      // localStorage helpers for saving/loading palettes
+      var STORAGE_KEY = 'hk_saved_palettes_v1';
+      function loadSavedPalettes() {
+        try { var raw = localStorage.getItem(STORAGE_KEY); return raw ? JSON.parse(raw) : []; } catch (e) { return []; }
+      }
+      function saveSavedPalettes(list) { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(list || [])); } catch (e) { console.warn(e); } }
+
+      function renderSavedList() {
+        var select = document.getElementById('hk-saved-list');
+        if (!select) return;
+        var list = loadSavedPalettes();
+        select.innerHTML = '';
+        var empty = document.createElement('option'); empty.value=''; empty.textContent = '--'; select.appendChild(empty);
+        list.forEach(function (it, idx) {
+          var opt = document.createElement('option'); opt.value = String(idx); opt.textContent = it.name + ' (' + it.colors.length + ')'; select.appendChild(opt);
+        });
+      }
+
+      function saveCurrentPalette() {
+        var cols = (window.huekit && window.huekit.currentPalette) ? window.huekit.currentPalette : [];
+        if (!cols || !cols.length) { showToast('No palette to save'); return; }
+        var name = prompt('Save palette name:');
+        if (!name) return;
+        var list = loadSavedPalettes();
+        // avoid exact duplicate names
+        if (list.some(function (x) { return x.name === name; })) name = name + ' (' + (new Date()).toLocaleString() + ')';
+        list.push({ name: name, colors: cols, created: Date.now() });
+        saveSavedPalettes(list);
+        renderSavedList();
+        showToast('Saved "' + name + '"');
+      }
+
+      function loadSavedByIndex(idx) {
+        var list = loadSavedPalettes();
+        if (!list || !list[idx]) return;
+        var entry = list[idx];
+        window.huekit.currentPalette = entry.colors.slice();
+        renderPalette(entry.colors);
+      }
+
+      function deleteSavedByIndex(idx) {
+        var list = loadSavedPalettes();
+        if (!list || !list[idx]) return;
+        var name = list[idx].name;
+        list.splice(idx,1);
+        saveSavedPalettes(list);
+        renderSavedList();
+        showToast('Deleted "' + name + '"');
+      }
+
+      // wire up toolbar controls (orientation, copy, save, saved-list)
+      document.addEventListener('DOMContentLoaded', function () {
+        // orientation default
+        window.huekit.orientation = window.huekit.orientation || 'vertical';
+        var or = document.getElementById('hk-orientation'); if (or) { or.value = window.huekit.orientation; or.addEventListener('change', function () { window.huekit.orientation = or.value; if (window.huekit.currentPalette) renderBackground(window.huekit.currentPalette); }); }
+
+        var copyBtn = document.querySelector('[data-action="copy-palette"]'); if (copyBtn) copyBtn.addEventListener('click', copyPalette);
+        var saveBtn = document.querySelector('[data-action="save-palette"]'); if (saveBtn) saveBtn.addEventListener('click', saveCurrentPalette);
+
+        var savedSelect = document.getElementById('hk-saved-list'); if (savedSelect) { savedSelect.addEventListener('change', function () { var v = savedSelect.value; if (v === '') return; loadSavedByIndex(parseInt(v,10)); }); }
+        var delBtn = document.getElementById('hk-delete-saved'); if (delBtn) { delBtn.addEventListener('click', function () { var s = document.getElementById('hk-saved-list'); if (!s) return; var v = s.value; if (!v) { showToast('No saved palette selected'); return; } deleteSavedByIndex(parseInt(v,10)); }); }
+
+        renderSavedList();
+      });
     })();
   </script>
 
