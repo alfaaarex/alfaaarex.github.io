@@ -407,7 +407,8 @@
         renderPalette(up);
       }
 
-      // bind toolbar count buttons and record last count
+      // ensure global namespace for huekit exists, then bind toolbar count buttons and record last count
+      window.huekit = window.huekit || {};
       window.huekit.lastCount = 5;
       document.addEventListener('click', function (ev) {
         // only handle toolbar buttons that specify a data-count attribute
