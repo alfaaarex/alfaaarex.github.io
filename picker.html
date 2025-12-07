@@ -71,6 +71,14 @@
       letter-spacing:1px;
     }
 
+    /* Collapsible toolbar */
+    .hk-toolbar{ overflow:visible; transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s ease; }
+    .hk-toolbar #hk-toolbar-content{ transition: max-height .36s cubic-bezier(.2,.9,.2,1), opacity .28s ease, transform .28s ease; max-height: 1000px; opacity:1; }
+    .hk-toolbar.collapsed{ transform: translateY(-6px); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+    .hk-toolbar.collapsed #hk-toolbar-content{ max-height:0; opacity:0; transform: scale(.98); overflow:hidden; }
+    #hk-toggle-toolbar{ background:transparent; border:1px solid rgba(0,0,0,0.06); cursor:pointer; font-weight:700; }
+    .hk-toolbar.collapsed #hk-toggle-toolbar{ transform: rotate(-90deg); }
+
     .hk-toolbar .btns{ display:flex; gap:6px }
     .hk-toolbar .options{ display:flex; align-items:center; gap:8px; margin-left:8px }
 
@@ -147,6 +155,15 @@
 
     /* keep the main content above the background */
     #wrap{ position:relative; z-index:1 }
+
+    /* centered spacebar prompt */
+    #hk-space-prompt{
+      position:fixed; left:50%; top:50%; transform:translate(-50%,-50%);
+      z-index:0; font-family:Roboto Mono, monospace; font-size:20px; color:rgba(0,0,0,0.12);
+      padding:18px 28px; border-radius:10px; background: rgba(255,255,255,0.6); backdrop-filter: blur(6px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06); transition: opacity .28s ease, transform .3s cubic-bezier(.2,.9,.2,1);
+    }
+    body.dark #hk-space-prompt{ color: rgba(255,255,255,0.9); background: rgba(0,0,0,0.28); }
   </style>
 
 
@@ -164,7 +181,11 @@
 
   <!-- Palette generation toolbar -->
   <div class="hk-toolbar" role="toolbar" aria-label="Palette generator">
+    <button id="hk-toggle-toolbar" aria-expanded="true" aria-controls="hk-toolbar-content" title="Toggle toolbar" style="position:absolute;left:8px;top:8px;padding:6px;border-radius:4px;">
+      ▸
+    </button>
     <span class="label">Generate palette</span>
+    <div id="hk-toolbar-content">
     <div class="btns">
       <button data-count="3">3</button>
       <button data-count="4">4</button>
@@ -199,10 +220,12 @@
       </label>
       <button id="hk-delete-saved" title="Delete selected" style="font-size:12px;padding:6px">Delete</button>
     </div>
+    </div>
   </div>
 
   <div id="wrap">
     <h1></h1>
+    <div id="hk-space-prompt">Press the spacebar</div>
     <div id="hk-palette" class="hk-palette" aria-live="polite"></div>
   </div>
 
@@ -528,6 +551,39 @@
       }
 
       if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initToolbar); else initToolbar();
+
+      // toolbar toggle behavior
+      (function(){
+        var btn = document.getElementById('hk-toggle-toolbar');
+        var toolbar = document.querySelector('.hk-toolbar');
+        var content = document.getElementById('hk-toolbar-content');
+        if (!btn || !toolbar || !content) return;
+        btn.addEventListener('click', function(e){
+          e.stopPropagation();
+          var collapsed = toolbar.classList.toggle('collapsed');
+          btn.setAttribute('aria-expanded', String(!collapsed));
+        });
+        // also close when clicking outside
+        document.addEventListener('click', function(ev){
+          if (!toolbar.classList.contains('collapsed')) return;
+          // if click is inside toolbar, ignore
+          if (ev.target.closest && ev.target.closest('.hk-toolbar')) return;
+          // otherwise do nothing
+        });
+      })();
+
+      // hide or fade the space prompt when palette exists
+      function updateSpacePrompt() {
+        var p = document.getElementById('hk-space-prompt');
+        if (!p) return;
+        var has = window.huekit && window.huekit.currentPalette && window.huekit.currentPalette.length;
+        if (has) { p.style.opacity = '0'; p.style.transform = 'translate(-50%,-48%) scale(.98)'; p.style.pointerEvents='none'; }
+        else { p.style.opacity = '1'; p.style.transform = 'translate(-50%,-50%) scale(1)'; p.style.pointerEvents='auto'; }
+      }
+
+      // ensure update when palette changes
+      var _origRenderPalette = renderPalette;
+      renderPalette = function(colors){ _origRenderPalette(colors); updateSpacePrompt(); };
     })();
   </script>
 
