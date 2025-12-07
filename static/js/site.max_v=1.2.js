@@ -66,7 +66,7 @@ $(window).load(function () {
       } else {
         if (!is_touch_device()) {
           $('h1').addClass('s');
-          $('h1').html('Press the spacebar');
+          $('h1').html('');
           $('body').css('background-color', '');
           $('body').colourBrightness();
         } else {
