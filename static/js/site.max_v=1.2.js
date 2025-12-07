@@ -12,7 +12,7 @@ $(window).load(function () {
   if (!is_touch_device()) {
     $('body').addClass('no-touch');
     $('h1').addClass('s');
-    $('h1').html('Press the spacebar');
+    $('h1').html('Press Your Space');
   } else {
     var hex = '#';
     var range = 'ABCDEF0123456789';
