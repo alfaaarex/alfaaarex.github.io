@@ -407,12 +407,14 @@
         renderPalette(up);
       }
 
-      // bind toolbar buttons and record last count
+      // bind toolbar count buttons and record last count
       window.huekit.lastCount = 5;
       document.addEventListener('click', function (ev) {
-        var btn = ev.target.closest && ev.target.closest('.hk-toolbar button');
+        // only handle toolbar buttons that specify a data-count attribute
+        var btn = ev.target.closest && ev.target.closest('.hk-toolbar button[data-count]');
         if (!btn) return;
-        var n = parseInt(btn.getAttribute('data-count'), 10) || 5;
+        var n = parseInt(btn.getAttribute('data-count'), 10);
+        if (!isFinite(n)) n = 5;
         window.huekit.lastCount = n;
         generatePalette(n);
       });
@@ -502,19 +504,29 @@
       }
 
       // wire up toolbar controls (orientation, copy, save, saved-list)
-      document.addEventListener('DOMContentLoaded', function () {
+      function initToolbar() {
         // orientation default
         window.huekit.orientation = window.huekit.orientation || 'vertical';
-        var or = document.getElementById('hk-orientation'); if (or) { or.value = window.huekit.orientation; or.addEventListener('change', function () { window.huekit.orientation = or.value; if (window.huekit.currentPalette) renderBackground(window.huekit.currentPalette); }); }
+        var or = document.getElementById('hk-orientation');
+        if (or) {
+          or.value = window.huekit.orientation;
+          or.addEventListener('change', function () { window.huekit.orientation = or.value; if (window.huekit.currentPalette) renderBackground(window.huekit.currentPalette); });
+        }
 
-        var copyBtn = document.querySelector('[data-action="copy-palette"]'); if (copyBtn) copyBtn.addEventListener('click', copyPalette);
-        var saveBtn = document.querySelector('[data-action="save-palette"]'); if (saveBtn) saveBtn.addEventListener('click', saveCurrentPalette);
+        var copyBtn = document.querySelector('[data-action="copy-palette"]');
+        if (copyBtn) copyBtn.addEventListener('click', function(e){ e.stopPropagation(); copyPalette(); });
+        var saveBtn = document.querySelector('[data-action="save-palette"]');
+        if (saveBtn) saveBtn.addEventListener('click', function(e){ e.stopPropagation(); saveCurrentPalette(); });
 
-        var savedSelect = document.getElementById('hk-saved-list'); if (savedSelect) { savedSelect.addEventListener('change', function () { var v = savedSelect.value; if (v === '') return; loadSavedByIndex(parseInt(v,10)); }); }
-        var delBtn = document.getElementById('hk-delete-saved'); if (delBtn) { delBtn.addEventListener('click', function () { var s = document.getElementById('hk-saved-list'); if (!s) return; var v = s.value; if (!v) { showToast('No saved palette selected'); return; } deleteSavedByIndex(parseInt(v,10)); }); }
+        var savedSelect = document.getElementById('hk-saved-list');
+        if (savedSelect) { savedSelect.addEventListener('change', function () { var v = savedSelect.value; if (v === '') return; loadSavedByIndex(parseInt(v,10)); }); }
+        var delBtn = document.getElementById('hk-delete-saved');
+        if (delBtn) { delBtn.addEventListener('click', function (e) { e.stopPropagation(); var s = document.getElementById('hk-saved-list'); if (!s) return; var v = s.value; if (!v) { showToast('No saved palette selected'); return; } deleteSavedByIndex(parseInt(v,10)); }); }
 
         renderSavedList();
-      });
+      }
+
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initToolbar); else initToolbar();
     })();
   </script>
 
