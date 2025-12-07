@@ -102,6 +102,13 @@ $(window).load(function () {
 
   $(document).on('keyup', function (e) {
     if (e.keyCode == 32) {
+      // If we're already on picker.html, skip navigation — the page handles spacebar locally.
+      try {
+        if (window && window.location && window.location.pathname && window.location.pathname.indexOf('picker.html') !== -1) {
+          return;
+        }
+      } catch (err) {}
+
       var hex = '#';
       var range = 'ABCDEF0123456789';
 
@@ -109,8 +116,8 @@ $(window).load(function () {
         hex += range.charAt(Math.floor(Math.random() * range.length));
       }
 
-  // Redirect to the GitHub Pages picker on the current project's domain
-  window.location.replace('https://alfaaarex.github.io/picker.html' + hex);
+      // Redirect to the GitHub Pages picker on the current project's domain
+      window.location.replace('https://alfaaarex.github.io/picker.html' + hex);
     }
   });
 
