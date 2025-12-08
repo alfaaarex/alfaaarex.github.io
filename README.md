@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# Website
-=======
-# alfaaarex.github.io
-Hostingwf export
->>>>>>> parent of f07505d (Update README with download link and password)
+# I don't know what to put here...
+
+Just deal with it man, idk what to write here.
